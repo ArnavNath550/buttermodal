@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/index.ts","../src/utils.ts"],"sourcesContent":["export { add } from \"./utils.js\";\n","export const add = (a:number, b:number) => a + b;\n"],"mappings":"yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,SAAAE,IAAA,eAAAC,EAAAH,GCAO,IAAMI,EAAM,CAACC,EAAUC,IAAaD,EAAIC","names":["index_exports","__export","add","__toCommonJS","add","a","b"]}

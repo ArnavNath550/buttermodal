@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/utils.ts"],"sourcesContent":["export const add = (a:number, b:number) => a + b;\n"],"mappings":"AAAO,IAAMA,EAAM,CAACC,EAAUC,IAAaD,EAAIC","names":["add","a","b"]}
