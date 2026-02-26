@@ -1,2 +1,2 @@
-var e=(r,d)=>r+d;export{e as add};
+function t(){return React.createElement("span",null,"Butter Modal")}export{t as ButterModal};
 //# sourceMappingURL=index.mjs.map

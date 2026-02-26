@@ -1,3 +1,5 @@
-declare const add: (a: number, b: number) => number;
+import * as react from 'react';
 
-export { add };
+declare function ButterModal(): react.JSX.Element;
+
+export { ButterModal };
