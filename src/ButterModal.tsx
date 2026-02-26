@@ -1,12 +1,15 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
-import { lightTheme } from './theme/theme';
-import BaseModal from './BaseModal';
+import BaseModal, { BaseModalProps, ButterModalTheme } from './BaseModal';
 
-export function ButterModal() {
-  return (
-    <ThemeProvider theme={lightTheme}>
-      <BaseModal />
-    </ThemeProvider>
-  );
+export type {
+  ButterModalTheme,
+  ModalState,
+  ModalStep,
+  BaseModalProps,
+} from './BaseModal';
+
+export interface ButterModalProps extends BaseModalProps {}
+
+export function ButterModal(props: ButterModalProps) {
+  return <BaseModal {...props} />;
 }
