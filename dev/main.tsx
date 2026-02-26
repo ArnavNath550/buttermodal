@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 
 function Demo() {
   const [open, setOpen] = useState(false);
+  const [step, setStep] = useState('default');
 
   const states = [
     {
@@ -12,6 +13,13 @@ function Demo() {
         <div>
           <h2>Welcome</h2>
           <p>This is the default state of the modal.</p>
+          <p>This is the default state of the modal.</p>
+          <p>This is the default state of the modal.</p>
+          <p>This is the default state of the modal.</p>
+          <p>This is the default state of the modal.</p>
+          <p>This is the default state of the modal.</p>
+
+          <button onClick={() => setStep('passkey')}>Passkey</button>
         </div>
       ),
     },
@@ -27,6 +35,7 @@ function Demo() {
           <p>This is the default state of the modal.</p>
           <p>This is the default state of the modal.</p>
           <p>This is the default state of the modal.</p>
+          <button onClick={() => setStep('success')}>Success</button>
         </div>
       ),
     },
@@ -39,6 +48,7 @@ function Demo() {
           <p>This is the default state of the modal.</p>
           <p>This is the default state of the modal.</p>
           <p>This is the default state of the modal.</p>
+          <button onClick={() => setStep('default')}>Back</button>
         </div>
       ),
     },
@@ -50,24 +60,26 @@ function Demo() {
 
       <ButterModal
         states={states}
+        step={step}
+        onStepChange={setStep}
         initialStep="default"
         open={open}
         onOpenChange={setOpen}
         trigger={<button>Trigger (alternative)</button>}
         theme={{
           background: '#ffffff',
-          border: '#e0e0e0',
+          border: 'transparent',
           text: '#111111',
           overlay: '#000000',
         }}
-        contentStyle={{
-          boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
-        }}
         containerStyle={{
-          padding: '8px',
+          padding: 12,
+        }}
+        contentStyle={{
+          borderRadius: 20,
         }}
       >
-        {({ step, setStep, close }) => (
+        {/*{({ step, setStep, close }) => (
           <div style={{ marginTop: 16, display: 'flex', gap: 8 }}>
             {step !== 'default' && (
               <button onClick={() => setStep('default')}>Back</button>
@@ -80,7 +92,7 @@ function Demo() {
             )}
             {step === 'success' && <button onClick={close}>Done</button>}
           </div>
-        )}
+        )}*/}
       </ButterModal>
     </>
   );

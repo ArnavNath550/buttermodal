@@ -21,6 +21,8 @@ export interface ButterModalTheme {
 export interface BaseModalProps {
   states: ModalState[];
   initialStep?: ModalStep;
+  step?: ModalStep;
+  onStepChange?: (step: ModalStep) => void;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   trigger?: React.ReactNode;
@@ -38,6 +40,8 @@ export interface BaseModalProps {
 const BaseModal: React.FC<BaseModalProps> = ({
   states,
   initialStep,
+  step,
+  onStepChange,
   open,
   onOpenChange,
   trigger,
@@ -48,12 +52,19 @@ const BaseModal: React.FC<BaseModalProps> = ({
   children,
 }) => {
   const firstKey = states[0]?.key ?? 'default';
+
+  const isStepControlled = step !== undefined;
   const [internalStep, setInternalStep] = React.useState<ModalStep>(
     initialStep ?? firstKey,
   );
-  const [internalOpen, setInternalOpen] = React.useState(false);
+  const currentStep = isStepControlled ? step! : internalStep;
+  const handleStepChange = (next: ModalStep) => {
+    if (!isStepControlled) setInternalStep(next);
+    onStepChange?.(next);
+  };
 
   const isOpenControlled = open !== undefined;
+  const [internalOpen, setInternalOpen] = React.useState(false);
   const currentOpen = isOpenControlled ? open! : internalOpen;
   const handleOpenChange = (val: boolean) => {
     if (!isOpenControlled) setInternalOpen(val);
@@ -62,7 +73,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
 
   const [ref, bounds] = useMeasure();
   const activeContent =
-    states.find((s) => s.key === internalStep)?.content ?? null;
+    states.find((s) => s.key === currentStep)?.content ?? null;
   const close = () => handleOpenChange(false);
 
   return (
@@ -82,8 +93,8 @@ const BaseModal: React.FC<BaseModalProps> = ({
               <StyledContent
                 $theme={theme}
                 style={contentStyle}
-                initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ type: 'spring', bounce: 0, duration: 0.3 }}
               >
@@ -97,7 +108,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
                   <div ref={ref} style={containerStyle}>
                     <AnimatePresence mode="popLayout" initial={false}>
                       <motion.div
-                        key={internalStep}
+                        key={currentStep}
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.95 }}
@@ -111,8 +122,8 @@ const BaseModal: React.FC<BaseModalProps> = ({
                       </motion.div>
                     </AnimatePresence>
                     {children?.({
-                      step: internalStep,
-                      setStep: setInternalStep,
+                      step: currentStep,
+                      setStep: handleStepChange,
                       close,
                     })}
                   </div>
@@ -145,6 +156,7 @@ const StyledContentAlign = styled.div`
   &:focus {
     outline: none;
   }
+  overflow: hidden;
 `;
 
 const StyledContent = styled(motion.div)<{ $theme?: ButterModalTheme }>`
@@ -154,6 +166,6 @@ const StyledContent = styled(motion.div)<{ $theme?: ButterModalTheme }>`
   border-radius: 15px;
   width: 90vw;
   max-width: 400px;
-  max-height: 85vh;
-  padding: 12.5px;
+  overflow: hidden;
+  will-change: height;
 `;
