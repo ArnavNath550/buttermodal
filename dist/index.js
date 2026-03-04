@@ -1,2 +1,217 @@
-"use strict";var a=Object.defineProperty;var p=Object.getOwnPropertyDescriptor;var d=Object.getOwnPropertyNames;var l=Object.prototype.hasOwnProperty;var B=(r,t)=>{for(var e in t)a(r,e,{get:t[e],enumerable:!0})},M=(r,t,e,n)=>{if(t&&typeof t=="object"||typeof t=="function")for(let o of d(t))!l.call(r,o)&&o!==e&&a(r,o,{get:()=>t[o],enumerable:!(n=p(t,o))||n.enumerable});return r};var f=r=>M(a({},"__esModule",{value:!0}),r);var s={};B(s,{ButterModal:()=>u});module.exports=f(s);function u(){return React.createElement("span",null,"Butter Modal")}0&&(module.exports={ButterModal});
-//# sourceMappingURL=index.js.map
+"use strict";
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/index.ts
+var index_exports = {};
+__export(index_exports, {
+  ButterModal: () => ButterModal
+});
+module.exports = __toCommonJS(index_exports);
+
+// src/ButterModal.tsx
+var import_react2 = __toESM(require("react"));
+
+// src/BaseModal.tsx
+var React = __toESM(require("react"));
+var import_styled_components = __toESM(require("styled-components"));
+var Dialog = __toESM(require("@radix-ui/react-dialog"));
+var import_framer_motion = require("framer-motion");
+
+// src/helpers/useMeasure.ts
+var import_react = require("react");
+function useMeasure() {
+  const [node, setNode] = (0, import_react.useState)(null);
+  const [size, setSize] = (0, import_react.useState)({ width: 0, height: 0 });
+  const ref = (0, import_react.useCallback)((el) => {
+    setNode(el);
+  }, []);
+  (0, import_react.useEffect)(() => {
+    if (!node) return;
+    const update = () => {
+      setSize({
+        width: node.scrollWidth,
+        height: node.scrollHeight
+      });
+    };
+    update();
+    const resizeObserver = new ResizeObserver(update);
+    resizeObserver.observe(node);
+    return () => resizeObserver.disconnect();
+  }, [node]);
+  return [ref, size];
+}
+
+// src/BaseModal.tsx
+var BaseModal = ({
+  states,
+  initialStep,
+  step,
+  onStepChange,
+  open,
+  onOpenChange,
+  trigger,
+  overlayStyle,
+  contentStyle,
+  containerStyle,
+  theme,
+  children
+}) => {
+  var _a, _b, _c, _d;
+  const firstKey = (_b = (_a = states[0]) == null ? void 0 : _a.key) != null ? _b : "default";
+  const isStepControlled = step !== void 0;
+  const [internalStep, setInternalStep] = React.useState(
+    initialStep != null ? initialStep : firstKey
+  );
+  const currentStep = isStepControlled ? step : internalStep;
+  const handleStepChange = (next) => {
+    if (!isStepControlled) setInternalStep(next);
+    onStepChange == null ? void 0 : onStepChange(next);
+  };
+  const isOpenControlled = open !== void 0;
+  const [internalOpen, setInternalOpen] = React.useState(false);
+  const currentOpen = isOpenControlled ? open : internalOpen;
+  const handleOpenChange = (val) => {
+    if (!isOpenControlled) setInternalOpen(val);
+    onOpenChange == null ? void 0 : onOpenChange(val);
+  };
+  const [ref, bounds] = useMeasure();
+  const activeContent = (_d = (_c = states.find((s) => s.key === currentStep)) == null ? void 0 : _c.content) != null ? _d : null;
+  const close = () => handleOpenChange(false);
+  return /* @__PURE__ */ React.createElement(Dialog.Root, { open: currentOpen, onOpenChange: handleOpenChange }, trigger !== void 0 ? /* @__PURE__ */ React.createElement(Dialog.Trigger, { asChild: true }, trigger) : null, /* @__PURE__ */ React.createElement(Dialog.Portal, null, /* @__PURE__ */ React.createElement(
+    StyledOverlay,
+    {
+      $theme: theme,
+      style: overlayStyle,
+      onClick: () => handleOpenChange(false)
+    }
+  ), /* @__PURE__ */ React.createElement(StyledContentAlign, null, /* @__PURE__ */ React.createElement(import_framer_motion.AnimatePresence, null, currentOpen && /* @__PURE__ */ React.createElement(
+    StyledContent,
+    {
+      $theme: theme,
+      style: contentStyle,
+      initial: { opacity: 0, scale: 0.95 },
+      animate: { opacity: 1, scale: 1 },
+      exit: { opacity: 0, scale: 0.95 },
+      transition: { type: "spring", bounce: 0, duration: 0.3 }
+    },
+    /* @__PURE__ */ React.createElement(
+      import_framer_motion.motion.div,
+      {
+        animate: {
+          height: bounds.height > 0 ? bounds.height : "auto"
+        },
+        transition: { type: "spring", bounce: 0, duration: 0.3 },
+        style: { overflow: "hidden" }
+      },
+      /* @__PURE__ */ React.createElement("div", { ref, style: containerStyle }, /* @__PURE__ */ React.createElement(import_framer_motion.AnimatePresence, { mode: "popLayout", initial: false }, /* @__PURE__ */ React.createElement(
+        import_framer_motion.motion.div,
+        {
+          key: currentStep,
+          initial: { opacity: 0, scale: 0.95 },
+          animate: { opacity: 1, scale: 1 },
+          exit: { opacity: 0, scale: 0.95 },
+          transition: {
+            type: "spring",
+            bounce: 0,
+            duration: 0.3
+          }
+        },
+        activeContent
+      )), children == null ? void 0 : children({
+        step: currentStep,
+        setStep: handleStepChange,
+        close
+      }))
+    )
+  )))));
+};
+var BaseModal_default = BaseModal;
+var StyledOverlay = import_styled_components.default.div`
+  background-color: ${({ $theme }) => {
+  var _a;
+  return (_a = $theme == null ? void 0 : $theme.overlay) != null ? _a : "#0d0d0d";
+}};
+  opacity: 0.2;
+  position: fixed;
+  inset: 0;
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+`;
+var StyledContentAlign = import_styled_components.default.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 15px;
+  &:focus {
+    outline: none;
+  }
+  overflow: hidden;
+`;
+var StyledContent = (0, import_styled_components.default)(import_framer_motion.motion.div)`
+  background-color: ${({ $theme }) => {
+  var _a;
+  return (_a = $theme == null ? void 0 : $theme.background) != null ? _a : "#fff";
+}};
+  color: ${({ $theme }) => {
+  var _a;
+  return (_a = $theme == null ? void 0 : $theme.text) != null ? _a : "#0d0d0d";
+}};
+  border: 1px solid ${({ $theme }) => {
+  var _a;
+  return (_a = $theme == null ? void 0 : $theme.border) != null ? _a : "#d2d2d2";
+}};
+  border-radius: 15px;
+  width: 90vw;
+  max-width: 400px;
+  overflow: hidden;
+  will-change: height;
+`;
+
+// src/ButterModal.tsx
+function ButterModal(props) {
+  return /* @__PURE__ */ import_react2.default.createElement(BaseModal_default, __spreadValues({}, props));
+}
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  ButterModal
+});

@@ -1,1 +1,0 @@
-{"version":3,"sources":["../src/ButterModal.tsx"],"sourcesContent":["export function ButterModal() {\n  return <span>Butter Modal</span>;\n}\n"],"mappings":"AAAO,SAASA,GAAc,CAC5B,OAAO,oBAAC,YAAK,cAAY,CAC3B","names":["ButterModal"]}
