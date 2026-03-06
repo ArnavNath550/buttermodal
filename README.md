@@ -90,7 +90,7 @@ function App() {
 
 ## Children Render Prop
 
-The `children` render prop gives you access to the current `step`, a `setStep` function, and a `close` function. Use this to render navigation controls — like Back, Next, and Done buttons — that live outside your step content and persist across transitions.
+The `children` render prop gives you access to the current `step`, a `setStep` function, and a `close` function.
 
 ```tsx
 <ButterModal

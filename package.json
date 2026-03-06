@@ -1,6 +1,6 @@
 {
   "name": "butter-modal",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "scripts": {
     "dev": "tsup --watch",
@@ -10,7 +10,16 @@
     "format": "prettier --write .",
     "check-format": "prettier --check ."
   },
-  "keywords": [],
+  "keywords": [
+    "modal",
+    "dialog",
+    "multi-step",
+    "wizard",
+    "framer-motion",
+    "radix-ui",
+    "animated",
+    "react"
+  ],
   "author": "Arnav Nath",
   "license": "ISC",
   "description": "A smoothly animated modal for React",
