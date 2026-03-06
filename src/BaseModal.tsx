@@ -146,6 +146,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
                   animate={{ opacity: 0.2 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
+                  //@ts-ignore
                   onClick={() => onClose()}
                 />
                 <StyledContentAlign>
