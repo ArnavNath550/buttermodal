@@ -53,5 +53,8 @@
   "bugs": {
     "url": "https://github.com/ArnavNath550/buttermodal/issues"
   },
-  "homepage": "https://github.com/ArnavNath550/buttermodal#readme"
+  "homepage": "https://github.com/ArnavNath550/buttermodal#readme",
+  "engines": {
+    "node": "22.x"
+  }
 }
