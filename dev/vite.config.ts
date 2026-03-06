@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       Buttermodal: path.resolve(__dirname, '../src/index.ts'),
+      'styled-components': path.resolve(__dirname, 'node_modules/styled-components'),
     },
   },
   build: {
