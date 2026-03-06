@@ -7,20 +7,31 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Code } from './components/Code';
 
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 20, scale: 0.97 },
+  hidden: { opacity: 0, y: 80, scale: 0.97 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
       delay: i * 0.15,
-      type: 'spring',
-      stiffness: 300,
-      damping: 22,
-      mass: 0.9,
-      duration: 0.5,
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
     },
   }),
+};
+
+const tadaVariants = {
+  hidden: { scale: 0.5, rotate: -15 },
+  visible: {
+    opacity: 1,
+    scale: [0.5, 1.2, 0.9, 1.1, 0.95, 1.05, 1],
+    rotate: [-15, 15, -10, 10, -5, 5, 0],
+    transition: {
+      duration: 0.9,
+      ease: 'easeOut',
+      times: [0, 0.2, 0.4, 0.55, 0.7, 0.85, 1],
+    },
+  },
 };
 
 const SHARED_TRANSITION = {
@@ -28,6 +39,13 @@ const SHARED_TRANSITION = {
   stiffness: 500,
   damping: 40,
   mass: 0.3,
+};
+
+const WOBBLE_TRANSITION = {
+  type: 'spring',
+  stiffness: 400,
+  damping: 10,
+  mass: 1,
 };
 
 function FadeUp({
@@ -217,7 +235,16 @@ function Demo() {
     <StyledContainer>
       <FadeUp index={0}>
         <StyledHeader>
-          <StyledImage src="public/images/butterlogo.svg" />
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={tadaVariants}
+            whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+            whileTap={{ scale: 0.9 }}
+            style={{ cursor: 'pointer' }}
+          >
+            <StyledImage src="public/images/butterlogo.svg" />
+          </motion.div>
         </StyledHeader>
       </FadeUp>
 
@@ -231,7 +258,7 @@ function Demo() {
           </StyledVersion>
           ButterModal is a multi-step modal component for React with smooth
           spring animations. Built on top of Radix UI's Dialog primitive and
-          Framer Motion.
+          framer-motion.
         </StyledContent>
       </FadeUp>
 
