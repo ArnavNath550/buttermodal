@@ -191,6 +191,7 @@ function Demo() {
       initialStep="default"
       open={open}
       onOpenChange={setOpen}
+      onClose={handleClose}
       theme={{
         background: '#ffffff',
         border: 'transparent',
@@ -224,7 +225,10 @@ function Demo() {
         <StyledContent
           style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
         >
-          <StyledCodePreview>{renderButterModalText()}</StyledCodePreview>
+          <StyledVersion>
+            <StyledCodePreview>{renderButterModalText()}</StyledCodePreview>
+            <StyledVersionText>v1.0.0</StyledVersionText>
+          </StyledVersion>
           ButterModal is a multi-step modal component for React with smooth
           spring animations. Built on top of Radix UI's Dialog primitive and
           Framer Motion.
@@ -241,6 +245,7 @@ function Demo() {
             initialStep="default"
             open={open}
             onOpenChange={setOpen}
+            onClose={handleClose}
             theme={{
               background: '#ffffff',
               border: 'transparent',
@@ -258,7 +263,7 @@ function Demo() {
       </FadeUp>
 
       <FadeUp index={4}>
-        <Code>npm i buttermodal</Code>
+        <Code>npm i butter-modal</Code>
       </FadeUp>
 
       <FadeUp index={5}>
@@ -302,6 +307,7 @@ function Demo() {
             ['onStepChange', '(step: ModalStep) => void'],
             ['open', 'boolean'],
             ['onOpenChange', '(open: boolean) => void'],
+            ['onClose', '() => void'],
             ['trigger', 'React.ReactNode'],
             ['overlayStyle', 'React.CSSProperties'],
             ['contentStyle', 'React.CSSProperties'],
@@ -597,4 +603,16 @@ const StyledModalFooter = styled(motion.div)`
 const UnstyledLink = styled.a`
   text-decoration: none;
   color: inherit;
+`;
+
+const StyledVersion = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+`;
+
+const StyledVersionText = styled.div`
+  font-size: 0.8rem;
+  color: var(--info);
 `;

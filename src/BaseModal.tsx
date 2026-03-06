@@ -55,6 +55,7 @@ export interface BaseModalProps {
   onStepChange?: (step: ModalStep) => void;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  onClose?: () => void;
   trigger?: React.ReactNode;
   overlayStyle?: React.CSSProperties;
   contentStyle?: React.CSSProperties;
@@ -74,6 +75,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
   onStepChange,
   open,
   onOpenChange,
+  onClose,
   trigger,
   overlayStyle,
   contentStyle,
@@ -101,15 +103,17 @@ const BaseModal: React.FC<BaseModalProps> = ({
   const [portalMounted, setPortalMounted] = React.useState(false);
 
   const handleOpenChange = (val: boolean) => {
-    if (!isOpenControlled) setInternalOpen(val);
-    onOpenChange?.(val);
-
     if (!val) {
+      onClose?.();
+
       setTimeout(() => {
         if (!isStepControlled) setInternalStep(defaultStep);
         onStepChange?.(defaultStep);
       }, 300);
     }
+
+    if (!isOpenControlled) setInternalOpen(val);
+    onOpenChange?.(val);
   };
 
   React.useEffect(() => {
@@ -142,6 +146,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
                   animate={{ opacity: 0.2 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
+                  onClick={() => onClose()}
                 />
                 <StyledContentAlign>
                   <StyledContent
