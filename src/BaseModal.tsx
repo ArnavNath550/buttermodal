@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import * as Dialog from '../node_modules/@radix-ui/react-dialog';
-import { AnimatePresence, motion } from '../node_modules/framer-motion';
+import * as Dialog from '@radix-ui/react-dialog';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState, useEffect, useCallback } from 'react';
 
 export function useMeasure<T extends HTMLElement>() {
@@ -89,7 +89,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
   const isStepControlled = step !== undefined;
   const [internalStep, setInternalStep] =
     React.useState<ModalStep>(defaultStep);
-  const currentStep = isStepControlled ? step! : internalStep;
+  const currentStep = isStepControlled ? step : internalStep;
 
   const handleStepChange = (next: ModalStep) => {
     if (!isStepControlled) setInternalStep(next);
@@ -98,14 +98,13 @@ const BaseModal: React.FC<BaseModalProps> = ({
 
   const isOpenControlled = open !== undefined;
   const [internalOpen, setInternalOpen] = React.useState(false);
-  const currentOpen = isOpenControlled ? open! : internalOpen;
+  const currentOpen = isOpenControlled ? open : internalOpen;
 
   const [portalMounted, setPortalMounted] = React.useState(false);
 
   const handleOpenChange = (val: boolean) => {
     if (!val) {
       onClose?.();
-
       setTimeout(() => {
         if (!isStepControlled) setInternalStep(defaultStep);
         onStepChange?.(defaultStep);
@@ -122,7 +121,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
     }
   }, [currentOpen]);
 
-  const [ref, bounds] = useMeasure();
+  const [measureRef, bounds] = useMeasure<HTMLDivElement>();
   const activeContent =
     states.find((s) => s.key === currentStep)?.content ?? null;
   const close = () => handleOpenChange(false);
@@ -130,7 +129,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
   return (
     <Dialog.Root open={currentOpen} onOpenChange={handleOpenChange}>
       {trigger !== undefined && (
-        <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
+        <Dialog.Trigger asChild>{trigger as React.ReactElement}</Dialog.Trigger>
       )}
       {portalMounted && (
         <Dialog.Portal forceMount>
@@ -146,8 +145,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
                   animate={{ opacity: 0.2 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  //@ts-ignore
-                  onClick={() => onClose()}
+                  onClick={close}
                 />
                 <StyledContentAlign>
                   <StyledContent
@@ -167,7 +165,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
                     }}
                   >
                     <div
-                      ref={ref}
+                      ref={measureRef}
                       style={{ ...containerStyle, display: 'flow-root' }}
                     >
                       <AnimatePresence mode="popLayout" initial={false}>

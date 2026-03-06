@@ -12261,7 +12261,7 @@ var BaseModal = ({
       setPortalMounted(true);
     }
   }, [currentOpen]);
-  const [ref, bounds] = useMeasure();
+  const [measureRef, bounds] = useMeasure();
   const activeContent = (_d = (_c = states.find((s) => s.key === currentStep)) == null ? void 0 : _c.content) != null ? _d : null;
   const close = () => handleOpenChange(false);
   return /* @__PURE__ */ React28.createElement(Root, { open: currentOpen, onOpenChange: handleOpenChange }, trigger !== void 0 && /* @__PURE__ */ React28.createElement(Trigger, { asChild: true }, trigger), portalMounted && /* @__PURE__ */ React28.createElement(Portal2, { forceMount: true }, /* @__PURE__ */ React28.createElement(
@@ -12278,7 +12278,7 @@ var BaseModal = ({
         animate: { opacity: 0.2 },
         exit: { opacity: 0 },
         transition: { duration: 0.2 },
-        onClick: () => onClose()
+        onClick: close
       }
     ), /* @__PURE__ */ React28.createElement(StyledContentAlign, null, /* @__PURE__ */ React28.createElement(
       StyledContent,
@@ -12301,7 +12301,7 @@ var BaseModal = ({
       /* @__PURE__ */ React28.createElement(
         "div",
         {
-          ref,
+          ref: measureRef,
           style: __spreadProps(__spreadValues({}, containerStyle), { display: "flow-root" })
         },
         /* @__PURE__ */ React28.createElement(AnimatePresence, { mode: "popLayout", initial: false }, /* @__PURE__ */ React28.createElement(
