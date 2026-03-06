@@ -296,7 +296,7 @@ function Demo() {
       <FadeUp index={5}>
         <StyledContent>
           Define your modal steps as an array of{' '}
-          <StyledInlineCode>ModalState</StyledInlineCode> objects — each with a
+          <StyledInlineCode>ModalState</StyledInlineCode> objects - each with a
           unique <StyledInlineCode>key</StyledInlineCode> and a{' '}
           <StyledInlineCode>content</StyledInlineCode> node. Pass this array to
           the <StyledInlineCode>states</StyledInlineCode> prop along with your
@@ -315,9 +315,7 @@ function Demo() {
           The <StyledInlineCode>children</StyledInlineCode> render prop gives
           you access to the current <StyledInlineCode>step</StyledInlineCode>, a{' '}
           <StyledInlineCode>setStep</StyledInlineCode> function, and a{' '}
-          <StyledInlineCode>close</StyledInlineCode> function. Use this to
-          render navigation controls — like Back, Next, and Done buttons — that
-          live outside your step content and persist across transitions.
+          <StyledInlineCode>close</StyledInlineCode> function.
         </StyledContent>
       </FadeUp>
 
