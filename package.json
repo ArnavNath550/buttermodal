@@ -11,9 +11,9 @@
     "check-format": "prettier --check ."
   },
   "keywords": [],
-  "author": "",
+  "author": "Arnav Nath",
   "license": "ISC",
-  "description": "",
+  "description": "A smoothly animated modal for React",
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
     "framer-motion": "^12.34.3",
@@ -32,5 +32,13 @@
   "resolutions": {
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArnavNath550/buttermodal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ArnavNath550/buttermodal/issues"
+  },
+  "homepage": "https://github.com/ArnavNath550/buttermodal#readme"
 }
