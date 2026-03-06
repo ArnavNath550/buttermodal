@@ -1,7 +1,7 @@
 {
   "name": "butter-modal",
-  "version": "1.0.6",
-  "main": "./index.js",
+  "version": "1.0.7",
+  "main": "./dist/index.js",
   "scripts": {
     "dev": "tsup --watch",
     "test": "vitest run",
