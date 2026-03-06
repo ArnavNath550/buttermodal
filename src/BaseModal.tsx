@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import * as Dialog from '@radix-ui/react-dialog';
-import { AnimatePresence, motion } from 'framer-motion';
+import * as Dialog from '../node_modules/@radix-ui/react-dialog';
+import { AnimatePresence, motion } from '../node_modules/framer-motion';
 import { useState, useEffect, useCallback } from 'react';
 
 export function useMeasure<T extends HTMLElement>() {
