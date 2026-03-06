@@ -24,20 +24,20 @@
   "license": "ISC",
   "description": "A smoothly animated modal for React",
   "dependencies": {
-    "@radix-ui/react-dialog": "^1.1.15",
-    "framer-motion": "^12.34.3",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
+    "@radix-ui/react-dialog": "^1.1.15",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@types/styled-components": "^5.1.36",
+    "framer-motion": "^12.34.3",
     "prettier": "^3.8.1",
+    "styled-components": "^6.3.11",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.18",
-    "@types/styled-components": "^5.1.36",
-    "styled-components": "^6.3.11"
+    "vitest": "^4.0.18"
   },
   "resolutions": {
     "@types/react": "^19.2.14",
