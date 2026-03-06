@@ -8,6 +8,8 @@ export default defineConfig({
     alias: {
       Buttermodal: path.resolve(__dirname, '../src/index.ts'),
       'styled-components': path.resolve(__dirname, 'node_modules/styled-components'),
+      '@radix-ui/react-dialog': path.resolve(__dirname, '../node_modules/@radix-ui/react-dialog'),
+      'framer-motion': path.resolve(__dirname, '../node_modules/framer-motion'),
     },
   },
   build: {
